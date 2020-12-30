@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>comyPet</display-name>
+  <welcome-file-list>
+    <welcome-file>view.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>
+    <servlet-name>CustomerFrontController</servlet-name>
+    <servlet-class>com.comypet.app.front.controller.CustomerFrontController</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>MemberFrontController</servlet-name>
+  	<servlet-class>com.comypet.app.front.controller.MemberFrontController</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<servlet-class>com.comypet.app.front.controller.AdminFrontController</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>PopupFrontController</servlet-name>
+  	<servlet-class>com.comypet.app.front.controller.PopupFrontController</servlet-class>
+  </servlet>
+
+   <servlet>
+  	<servlet-name>BoardFrontController</servlet-name>
+  	<servlet-class>com.comypet.app.front.controller.BoardFrontController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>MemberFrontController</servlet-name>
+  	<url-pattern>*.me</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AdminFrontController</servlet-name>
+  	<url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>CustomerFrontController</servlet-name>
+    <url-pattern>*.cs</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>PopupFrontController</servlet-name>
+    <url-pattern>*.pop</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>BoardFrontController</servlet-name>
+    <url-pattern>*.bo</url-pattern>
+  </servlet-mapping>
+</web-app>

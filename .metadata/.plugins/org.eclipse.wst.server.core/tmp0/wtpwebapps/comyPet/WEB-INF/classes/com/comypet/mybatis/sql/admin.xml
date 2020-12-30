@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin">
+	<select id="selectAdminLogin" parameterType="map" resultType="string">
+		SELECT ADMIN_ID FROM CMPP_ADMIN_INFO WHERE ADMIN_ID = #{admin_id} AND ADMIN_PW = #{admin_pw}
+	</select>
+	
+	<select id="selectAdminSearchBoardList_T" parameterType="string" resultType="BoardViewVO">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_FREE_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_FREE_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardMList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_MEET_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardMList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_MEET_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardNList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_FRA_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardNList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_FRA_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardQList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_QNA_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchBoardQList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_QNA_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+
+	<select id="selectAdminSearchGalleryPList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_PUPPY_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryPList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_PUPPY_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryCList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_CAT_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryCList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_CAT_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryDList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_DETAIL_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryDList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_DETAIL_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryEList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_ETC_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	<select id="selectAdminSearchGalleryEList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_ETC_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+	</select>
+	
+	
+	<select id="selectAdminSearchId" parameterType="string" resultType="AdminVo">
+		SELECT * FROM CMPP_ADMIN_INFO WHERE ADMIN_ID LIKE '%'||#{search}||'%' ORDER BY ADMIN_UID DESC
+	</select>
+	
+	<select id="selectAdminSearchLevel" parameterType="string" resultType="AdminVo">
+		SELECT * FROM CMPP_ADMIN_INFO WHERE ADMIN_LEVEL LIKE '%'||#{search}||'%' ORDER BY ADMIN_UID DESC
+	</select>
+	
+	<select id="selectAdminSearchMemberId" parameterType="string" resultType="MemberVo">
+		SELECT * FROM CMPP_MEMBER_INFO WHERE MEMBER_ID LIKE '%'||#{search}||'%' ORDER BY MEMBER_UID DESC
+	</select>
+	<select id="selectAdminSearchMemberName" parameterType="string" resultType="MemberVo">
+		SELECT * FROM CMPP_MEMBER_INFO WHERE MEMBER_NAME LIKE '%'||#{search}||'%' ORDER BY MEMBER_UID DESC
+	</select>
+	<select id="selectAdminSearchMemberGender" parameterType="string" resultType="MemberVo">
+		SELECT * FROM CMPP_MEMBER_INFO WHERE MEMBER_GENDER LIKE '%'||#{search}||'%' ORDER BY MEMBER_UID DESC
+	</select>
+	
+	
+	<select id="selectMemberListAll" parameterType="map" resultType="MemberVo">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM CMPP_MEMBER_INFO B ORDER BY MEMBER_UID DESC) D) B 
+					WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	
+	<select id="selectMemberListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO
+	</select>
+	
+	<select id="selectListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_ADMIN_INFO
+	</select>
+	
+	<select id="selectListAll" parameterType="map" resultType="AdminVo">
+		SELECT * FROM 
+			(SELECT ROWNUM R, D.* FROM 
+				(SELECT * FROM CMPP_ADMIN_INFO B ORDER BY ADMIN_UID DESC) D) B 
+					WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	
+	<select id="selectBoardFListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_FREE_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectBoardFListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_FREE_BOARD
+	</select>
+	
+	<select id="selectGalleryPListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_PUPPY_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectGalleryPListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_PUPPY_BOARD
+	</select>
+	
+	<select id="selectGalleryCListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_CAT_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectGalleryCListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_CAT_BOARD
+	</select>
+	
+	<select id="selectGalleryDListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_DETAIL_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectGalleryDListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_DETAIL_BOARD
+	</select>
+	
+	<select id="selectGalleryEListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_ETC_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectGalleryEListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_ETC_BOARD
+	</select>
+	
+	
+	<select id="selectBoardMListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_MEET_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectBoardMListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEET_BOARD
+	</select>
+	
+	<select id="selectBoardNListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_FRA_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	
+	<select id="selectBoardNListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_FRA_BOARD
+	</select>
+	
+	<select id="selectBoardQListAll" parameterType="map" resultType="BoardViewVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_QNA_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="selectBoardQListCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_QNA_BOARD
+	</select>
+	
+	<!-- 접속된 관리자 uid가져오기 -->
+	<select id="selectAdminUid" parameterType="string" resultType="_int">
+		SELECT ADMIN_UID FROM CMPP_ADMIN_INFO WHERE ADMIN_ID = #{admin_id}
+	</select>
+	<!-- 관리자 아이디 중복체크 -->
+	<select id="selectAdminCheckId" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_ADMIN_INFO WHERE ADMIN_ID = #{admin_id}
+	</select>
+	
+	<!-- 관리자 등급 가져오기 -->
+	<select id="selectAdminLevel" parameterType="string" resultType="_int">
+		SELECT ADMIN_LEVEL FROM CMPP_ADMIN_INFO WHERE ADMIN_ID = #{admin_id}
+	</select>
+	
+	<!-- 관리자 추가 -->
+	<insert id="selectAdminAdd" parameterType="AdminVo">
+		INSERT INTO CMPP_ADMIN_INFO VALUES(CMPP_ADMIN_SEQ.NEXTVAL, #{admin_id}, #{admin_pw}, ${admin_level})
+	</insert>
+	
+	<!-- 공지사항게시판 글쓰기 -->
+	<insert id="insertBoardContentsNotice" parameterType="map">
+		INSERT INTO CMPP_NOTICE_BOARD VALUES(${board_idx}, (SELECT ADMIN_UID FROM CMPP_ADMIN_INFO WHERE ADMIN_UID=${admin_uid}),#{board_title},#{board_contents},0,0,0,SYSDATE,0,0)
+	</insert>
+	
+	<!-- 회원수정 -->
+	<update id="updateMember" parameterType="MemberVo">
+		UPDATE CMPP_MEMBER_INFO SET MEMBER_NICK = #{member_nick}, MEMBER_TEL = #{member_tel}, MEMBER_EMAIL = #{member_email}, MEMBER_ADDRESS_DETAIL = #{member_address_detail}, MEMBER_ADDRESS_ETC = #{member_address_etc} WHERE MEMBER_UID = ${member_uid}
+	</update>
+	
+	<!-- 게시판 블라인드 처리 -->
+	<update id="updateBlindBoardF" parameterType="_int">
+		UPDATE CMPP_FREE_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindBoardM" parameterType="_int">
+		UPDATE CMPP_MEET_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindBoardN" parameterType="_int">
+		UPDATE CMPP_FRA_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindBoardQ" parameterType="_int">
+		UPDATE CMPP_QNA_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	
+	<!-- 갤러리 블라인드 처리 -->
+	<update id="updateBlindGalleryP" parameterType="_int">
+		UPDATE CMPP_PUPPY_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindGalleryC" parameterType="_int">
+		UPDATE CMPP_CAT_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindGalleryD" parameterType="_int">
+		UPDATE CMPP_DETAIL_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<update id="updateBlindGalleryE" parameterType="_int">
+		UPDATE CMPP_ETC_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	
+	<!-- 반려동물 게시글 블라인드 처리 -->
+	<update id="updateBlindBoardL" parameterType="_int">
+		UPDATE CMPP_LOST_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	<!-- 불편사항 게시글 블라인드 처리 -->
+	<update id="updateBlindBoardSug" parameterType="_int">
+		UPDATE CMPP_SUG_BOARD SET BOARD_BLIND = ${board_blind} WHERE BOARD_IDX = ${board_idx}
+	</update>
+	
+	 <!-- 반려동물 찾기 게시판 추가 -->
+   <!-- 제목으로 검색 -->
+   <select id="selectAdminSearchBoardLList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_LOST_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+   <!-- 내용으로 검색 -->
+   <select id="selectAdminSearchBoardLList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_LOST_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+   <!-- 반려동물 찾기 게시판 모든 리스트 뽑기 -->
+   <select id="selectBoardLListAll" parameterType="map" resultType="BoardViewVO">
+      SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_LOST_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 반려동물 찾기 게시판 갯수 확인 -->
+   <select id="selectBoardLListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_LOST_BOARD
+   </select>
+   <!-- 여기까지 추가 -->
+   <!-- 광고문의 게시판 리스트-->
+   <select id="selectAdsBoardAllList" resultType="CustomerVo">
+      SELECT * FROM 
+         (SELECT ROWNUM R, D.* FROM 
+            (SELECT * FROM CMPP_CUSTOMER B WHERE CUSTOMER_STATE = 1 ORDER BY CUSTOMER_IDX DESC) D) B 
+               WHERE B.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 광고문의 게시판 갯수 -->
+   <select id="selectAdsBoardListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_CUSTOMER WHERE CUSTOMER_STATE = 1
+   </select>
+   <!-- 제휴문의 게시판 리스트-->
+   <select id="selectSupBoardAllList" resultType="CustomerVo">
+      SELECT * FROM 
+         (SELECT ROWNUM R, D.* FROM 
+            (SELECT * FROM CMPP_CUSTOMER B WHERE CUSTOMER_STATE = 0 ORDER BY CUSTOMER_IDX DESC) D) B 
+               WHERE B.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 제휴문의 게시판 갯수 -->
+   <select id="selectSupBoardListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_CUSTOMER WHERE CUSTOMER_STATE = 0
+   </select>
+   <!-- 불편사항 게시판 리스트-->
+   <select id="selectSugBoardAllList" resultType="BoardViewVO">
+         SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick
+		FROM
+		(SELECT * FROM CMPP_SUG_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   	<!-- 불편사항 제목으로 검색 -->
+   <select id="selectAdminSearchBoardSList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_SUG_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+	<!-- 불편사항 내용으로 검색 -->
+   <select id="selectAdminSearchBoardSList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT MEMBER_NICK m FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = D.MEMBER_UID) member_nick FROM(SELECT * FROM CMPP_SUG_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+	<!-- 불편사항 게시판 갯수 확인 -->
+   <select id="selectBoardSListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_SUG_BOARD
+   </select>
+   <!-- 공지사항 모든 리스트 -->
+   <select id="selectBoardNoticeListAll" parameterType="map" resultType="BoardViewVo">
+      SELECT * FROM
+		(SELECT ROWNUM R, D.*,
+		(SELECT ADMIN_ID m FROM CMPP_ADMIN_INFO WHERE ADMIN_UID = D.ADMIN_UID) admin_id
+		FROM
+		(SELECT * FROM CMPP_NOTICE_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 공지사항 제목으로 검색 -->
+   <select id="selectAdminSearchBoardNoticeList_T" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT ADMIN_ID m FROM CMPP_ADMIN_INFO WHERE ADMIN_UID = D.ADMIN_UID) admin_id FROM(SELECT * FROM CMPP_NOTICE_BOARD WHERE BOARD_TITLE LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+   <!-- 공지사항 내용으로 검색 -->
+   <select id="selectAdminSearchBoardNoticeList_C" parameterType="string" resultType="BoardViewVo">
+		SELECT * FROM(SELECT D.*,(SELECT ADMIN_ID m FROM CMPP_ADMIN_INFO WHERE ADMIN_UID = D.ADMIN_UID) admin_id FROM(SELECT * FROM CMPP_NOTICE_BOARD WHERE BOARD_CONTENTS LIKE '%'||#{search}||'%' ORDER BY BOARD_IDX DESC) D)
+   </select>
+   <!-- 공지사항 게시판 갯수 확인 -->
+   <select id="selectBoardNoticeListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_NOTICE_BOARD
+   </select>
+   <!-- 공지사항 게시글 정보가져오기 -->
+   <select id="selectBoardNoticeGetDetail" parameterType="_int" resultType="NoticeBoardVo">
+   		SELECT * FROM CMPP_NOTICE_BOARD WHERE BOARD_IDX = ${admin_uid}
+   </select>
+   
+   
+   <!-- 공지사항 게시글삭제하기 -->
+   <!-- 파일경로 가져오기 -->
+   	<select id="selectBoardFileGetDetail" parameterType="_int" resultType="string">
+   		SELECT FILE_PATH FROM CMPP_BOARD_FILE WHERE BOARD_NUM = ${board_num}
+   	</select>
+   	<!-- 게시글번호로 값 삭제 -->
+   	<delete id="deleteBoardFile" parameterType="_int">
+   		DELETE FROM CMPP_BOARD_FILE WHERE BOARD_NUM = ${board_num}
+   	</delete>
+   	<!-- 공지사항 게시글 삭제 -->
+   	<delete id="deleteBoardNotice" parameterType="_int">
+   		DELETE FROM CMPP_NOTICE_BOARD WHERE BOARD_IDX = ${board_idx}
+   	</delete>
+   	
+   	
+   
+   <!-- 여기까지 -->
+   <!-- 신고된 유저 가져오기 -->
+	<select id="selectMemberReportReceiveList" parameterType="map" resultType="MemberReportReceiveVo">
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_MEMBER_REPORT WHERE REPORT_STATE = #{report_state} ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER) B2) A
+      WHERE A.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<!-- 신고 유저 이름으로 검색 -->
+   <select id="selectMemberReportReceiveSearchNickList" parameterType="string" resultType="MemberReportReceiveVo">
+      <!-- SELECT * FROM CMPP_MEMBER_REPORT WHERE MEMBER_NICK LIKE '%'||#{search}||'%' ORDER BY REPORT_UID DESC -->
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM 
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_MEMBER_REPORT WHERE REPORT_STATE = #{report_state} ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER ) B2 
+      WHERE B2.R_NICK LIKE '%'||#{search}||'%' ) A2
+      WHERE A2.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 신고 유저 타입으로 검색 -->
+   <select id="selectMemberReportReceiveSearchTypeList" parameterType="map" resultType="MemberReportReceiveVo">
+      <!-- SELECT * FROM CMPP_MEMBER_REPORT WHERE REPORT_TYPE LIKE '%'||#{search}||'%' ORDER BY REPORT_UID DESC -->
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_MEMBER_REPORT WHERE REPORT_STATE = #{report_state} AND REPORT_TYPE LIKE '%'||#{search}||'%' ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER) B2) A
+      WHERE A.R BETWEEN ${startRow} AND ${endRow}
+   </select>
+   <!-- 신고 유저 갯수 가져오기 -->
+   <select id="selectMemberReportReceiveListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_MEMBER_REPORT WHERE NOT REPORT_STATE IN 0
+   </select>
+   <!-- CMPP_MEMBER_REPORT 상태 처리하기 -->
+	<update id="updateReportState" parameterType="_int">
+		UPDATE CMPP_MEMBER_REPORT SET REPORT_STATE = #{report_state} WHERE REPORT_UID = #{report_uid}
+	</update>
+	<!-- 멤버 상태 처리 -->
+	<update id="updateMemberState" parameterType="_int">
+		UPDATE CMPP_MEMBER_INFO 
+		SET MEMBER_MUTE_COMMENT = #{member_mute_comment}, MEMBER_MUTE_CONTENTS = #{member_mute_comment} 
+		WHERE MEMBER_UID IN (SELECT REPORTER FROM CMPP_MEMBER_REPORT WHERE REPORTER = #{reporter})
+	</update>
+	
+	<!-- 게시판 신고 리스트 가져오기 -->
+	<select id="selectBoardReportReceiveList" parameterType="map" resultType="BoardReportReceiveVo">
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_BOARD_REPORT WHERE REPORT_STATE = #{report_state} ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER) B2) A
+      WHERE A.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<!-- 게시판 신고 리스트 제목 가져오기 -->
+	<select id="selectBoardTitleList" parameterType="map" resultType="string">
+		SELECT BOARD_TITLE FROM ${board_name} WHERE BOARD_IDX = #{board_idx}
+	</select>
+   <!-- 신고 게시판 갯수 가져오기 -->
+   <select id="selectBoardReportReceiveListCnt" resultType="_int">
+      SELECT COUNT(*) FROM CMPP_BOARD_REPORT WHERE NOT REPORT_STATE IN 0
+   </select>
+   
+   <!-- 신고 게시판 상태 처리하기 (블라인드 처리, 취소 처리하기)-->
+   <update id="updateBoardReportState">
+   	UPDATE CMPP_BOARD_REPORT SET REPORT_STATE = #{report_state} WHERE REPORT_UID = #{report_uid}
+   </update>
+   
+   <!-- 신고된 게시판 각각 들어가서 상태 처리하기 (블라인드 처리, 블라인드 된 게시판 취소 처리하기) -->
+   <update id="updateBoardState">
+   	UPDATE ${board_name} SET BOARD_BLIND = #{board_blind} WHERE BOARD_IDX = #{board_idx}
+   </update>
+   
+   	<!-- 신고 게시판 타입으로 검색 -->
+	<select id="selectBoardReportReceiveSearchTypeList" parameterType="map" resultType="BoardReportReceiveVo">
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_BOARD_REPORT WHERE REPORT_STATE = #{report_state} AND REPORT_TYPE LIKE '%'||#{search}||'%' ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER) B2) A
+      WHERE A.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	
+	<!-- 신고 게시판 닉네임으로 검색 -->
+	<select id="selectBoardReportReceiveSearchNickList" parameterType="map" resultType="BoardReportReceiveVo">
+      SELECT * FROM
+      (SELECT ROWNUM R, B2.* FROM
+      (SELECT B1.*, C2.MEMBER_ID W_ID, C2.MEMBER_NICK W_NICK FROM CMPP_MEMBER_INFO C2, 
+      (SELECT MEMBER_ID R_ID, MEMBER_NICK R_NICK, D1.* FROM CMPP_MEMBER_INFO C1, 
+      (SELECT * FROM CMPP_BOARD_REPORT WHERE REPORT_STATE = #{report_state} ORDER BY REPORT_UID DESC) D1 
+      WHERE C1.MEMBER_UID = D1.REPORTER) B1 
+      WHERE C2.MEMBER_UID = B1.WRITER) B2 
+      WHERE B2.R_NICK LIKE '%'||#{search}||'%' ) A
+      WHERE A.R BETWEEN ${startRow} AND ${endRow}
+	</select>
+	
+	
+	<!-- 선택된 게시판의 내용 가져오기 -->
+	<select id="selectBoardContents" parameterType="map" resultType="string">
+		SELECT BOARD_CONTENTS FROM ${board_name} WHERE BOARD_IDX = #{board_idx}
+	</select>
+</mapper>

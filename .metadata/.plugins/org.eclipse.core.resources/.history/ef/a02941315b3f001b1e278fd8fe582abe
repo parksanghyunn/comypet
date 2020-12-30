@@ -1,0 +1,6 @@
+package com.comypet.mapper;
+
+public interface ProfilesMapper {
+	public void insertProfile();
+	public String selectProfile(int member_uid);
+}

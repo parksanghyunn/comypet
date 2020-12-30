@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.comypet.app.vo.MemberVo" alias="MemberVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardVo" alias="BoardVo"/>
+		<typeAlias type="com.comypet.app.vo.AdminVo" alias="AdminVo"/>
+		<typeAlias type="com.comypet.app.vo.PopupVo" alias="PopupVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardFilesVo" alias="BoardFilesVo"/>
+		<typeAlias type="com.comypet.app.vo.CustomerVo" alias="CustomerVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardCommentVo" alias="BoardCommentVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardReCommentVo" alias="BoardReCommentVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardCommentNickVo" alias="BoardCommentNickVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardReCommentNickVo" alias="BoardReCommentNickVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardViewVo" alias="BoardViewVo"/>
+		<typeAlias type="com.comypet.app.vo.CustomerBoardVo" alias="CustomerBoardVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardUpVo" alias="BoardUpVo"/>
+		<typeAlias type="com.comypet.app.vo.NoticeBoardVo" alias="NoticeBoardVo"/>
+		<typeAlias type="com.comypet.app.vo.NoticeViewVo" alias="NoticeViewVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardReportVo" alias="BoardReportVo"/>
+		<typeAlias type="com.comypet.app.vo.BoardReportReceiveVo" alias="BoardReportReceiveVo"/>
+		<typeAlias type="com.comypet.app.vo.MemberReportVo" alias="MemberReportVo"/>
+		<typeAlias type="com.comypet.app.vo.MemberReportReceiveVo" alias="MemberReportReceiveVo"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+				<property name="username" value="hr"/>
+				<property name="password" value="hr"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource ="com/comypet/mybatis/sql/member.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/board.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/admin.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/customer.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/popup.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/boardFiles.xml"/>
+		<mapper resource ="com/comypet/mybatis/sql/profiles.xml"/>
+	</mappers>
+	
+</configuration>

@@ -1,0 +1,49 @@
+package com.comypet.service;
+
+import javax.inject.Inject;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+import com.comypet.domain.MemberVo;
+import com.comypet.mapper.MemberMapper;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@Service
+@Log4j
+public class MemberServiceImpe implements MemberService {
+	@Setter(onMethod_= @Autowired)
+	private MemberMapper mapper;
+	
+	@Override
+	public boolean join(MemberVo member) {
+		return mapper.insertMemberJoin(member) == 1;
+	}
+
+	@Override
+	public String login(MemberVo member) {
+		return mapper.seletMemberLogin(member);
+	}
+	
+	@Override
+	public int checkid(String member_id) {
+		return mapper.selectMemberIdCheck(member_id);
+	}
+	
+	@Override
+	public int checkNick(String member_nick) {
+		return mapper.selectMemberNickCheck(member_nick);
+	}
+	
+	@Override
+	public int checkEmail(String member_email) {
+		log.info("check_email : " + member_email);
+		return mapper.selectEmailCheck(member_email);
+	}
+}

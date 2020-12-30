@@ -1,0 +1,5 @@
+package com.comypet.domain;
+
+public class EmailDTO {
+
+}

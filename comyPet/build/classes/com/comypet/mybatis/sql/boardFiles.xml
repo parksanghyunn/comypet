@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardFiles">
+	<select id="selectBoardPath" parameterType="int" resultType="string">
+		SELECT BOARD_PATH FROM CMPP_BOARD_FILE WHERE BOARD_IDX = #{idx} AND ROWNUM = 1
+	</select>
+	
+	<insert id="insertFiles">
+		INSERT INTO CMPP_BOARD_FILE VALUES (CMPP_FILES_SEQ.NEXTVAL,#{file_name},#{board_path},#{board_num},#{board_state})
+	</insert>
+	
+	<delete id="deleteInsertFiles" parameterType="int">
+		DELETE CMPP_BOARD_FILE WHERE BOARD_IDX = #{idx}
+	</delete>
+	
+	<select id="selectBoardPathList" resultType="BoardFilesVo">
+		SELECT * FROM CMPP_BOARD_FILE WS WHERE NOT WS.ROWID > (SELECT MIN(ROWID) FROM CMPP_BOARD_FILE WHERE WS.BOARD_IDX = BOARD_IDX) AND BOARD_IDX != 0
+	</select>
+	
+</mapper>

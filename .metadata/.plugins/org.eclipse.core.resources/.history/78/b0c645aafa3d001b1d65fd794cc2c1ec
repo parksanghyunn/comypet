@@ -1,0 +1,8 @@
+package com.comypet.mapper;
+
+import com.comypet.domain.MemberVo;
+
+public interface MemberMapper {
+	public int insertMemberJoin(MemberVo member);
+	public String seletMemberLogin(String member_id, String member_pw);
+}

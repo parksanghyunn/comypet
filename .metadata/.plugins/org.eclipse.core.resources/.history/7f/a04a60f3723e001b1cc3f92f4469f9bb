@@ -1,0 +1,10 @@
+package com.comypet.service;
+
+import com.comypet.domain.MemberVo;
+
+public interface MemberService {
+	public boolean join(MemberVo member);
+	public String login(MemberVo member);
+	public int checkNick(String member_nick);
+	public int checkid(String member_id);
+}

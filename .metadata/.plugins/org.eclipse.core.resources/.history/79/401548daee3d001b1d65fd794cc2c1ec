@@ -1,0 +1,7 @@
+package com.comypet.mapper;
+
+import com.comypet.domain.MemberVo;
+
+public interface MemberMapper {
+	public int insertMemberJoin(MemberVo member);
+}

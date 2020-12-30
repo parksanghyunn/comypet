@@ -1,0 +1,4 @@
+
+12월 14, 2020 10:29:12.70 NEW SESSION
+12월 14, 2020 10:29:12.70 [26076:22352:1214/102912.700:ERROR:account_info_fetcher.cc(60)] OnGetTokenFailure: Invalid credentials (credentials rejected by client).
+12월 14, 2020 10:29:13.74 [26076:22352:1214/102913.746:ERROR:device_event_log_impl.cc(211)] [10:29:13.745] USB: usb_device_handle_win.cc:1020 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)

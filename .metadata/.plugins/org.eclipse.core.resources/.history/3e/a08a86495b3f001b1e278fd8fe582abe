@@ -1,0 +1,8 @@
+package com.comypet.domain;
+
+public class Snippet {
+	public static void main(String[] args) {
+		selectProfile
+	}
+}
+

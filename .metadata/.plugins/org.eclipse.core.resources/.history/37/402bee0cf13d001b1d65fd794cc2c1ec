@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	<insert id="insertMemberJoin" parameterType="MemberVo">
+		INSERT INTO
+		CMPP_MEMBER_INFO
+		VALUES(CMPP_MEMBER_SEQ.NEXTVAL, #{member_name},
+		#{member_id}, #{member_pw}, #{member_nick}, #{member_gender},
+		#{member_birth}, #{member_tel}, #{member_email},#{member_zipcode},
+		#{member_address}, #{member_address_detail}, #{member_address_etc}, 0,
+		0)
+	</insert>
+
+	<select id="selectMemberIdCheck" parameterType="string"
+		resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_ID =
+		#{id}
+	</select>
+
+	<select id="selectMemberNickCheck" parameterType="string"
+		resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_NICK =
+		#{nick}
+	</select>
+	<select id="seletMemberLogin" parameterType="map"
+		resultType="string">
+		SELECT MEMBER_ID FROM CMPP_MEMBER_INFO WHERE MEMBER_ID =
+		#{member_id} AND MEMBER_PW = #{member_pw}
+	</select>
+
+	<!-- 정지 처리 확인하기 -->
+	<select id="selectMuteCheck" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_UID = #{member_uid} AND MEMBER_MUTE_COMMENT = 1 AND MEMBER_MUTE_CONTENTS = 1
+	</select>
+	<!-- 이메일 중복 확인 -->
+	<select id="selectEmailCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_EMAIL = #{member_email}
+	</select>
+	<select id="selectMemberUid" parameterType="string"
+		resultType="_int">
+		SELECT MEMBER_UID FROM CMPP_MEMBER_INFO WHERE MEMBER_ID
+		=#{member_id}
+	</select>
+
+	<select id="selectFindId" parameterType="map"
+		resultType="string">
+		SELECT MEMBER_ID FROM CMPP_MEMBER_INFO WHERE MEMBER_NAME =
+		#{member_name}
+		AND MEMBER_EMAIL = #{member_email}
+	</select>
+	<select id="selectFindPw" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_EMAIL = #{member_email}
+	</select>
+	<select id="getNick" parameterType="_int" resultType="string">
+		SELECT
+		MEMBER_NICK FROM CMPP_MEMBER_INFO WHERE MEMBER_UID =#{member_uid}
+	</select>
+	<select id="selectInfo" parameterType="_int"
+		resultType="MemberVO">
+		SELECT * FROM CMPP_MEMBER_INFO WHERE MEMBER_UID
+		=#{member_uid}
+	</select>
+	<update id="updateInfo" parameterType="map">
+		UPDATE CMPP_MEMBER_INFO
+		SET MEMBER_NICK = #{member_nick}, MEMBER_TEL = #{member_tel},
+		MEMBER_ZIPCODE = #{member_zipcode}, MEMBER_ADDRESS =
+		#{member_address},
+		MEMBER_ADDRESS_DETAIL = #{member_address_detail},
+		MEMBER_ADDRESS_ETC = #{member_address_etc}
+		WHERE MEMBER_UID =
+		#{member_uid}
+	</update>
+	<update id="updatePw" parameterType="map">
+		UPDATE CMPP_MEMBER_INFO SET MEMBER_PW = #{member_pw} WHERE MEMBER_ID =
+		#{member_id}
+	</update>
+	<select id="selectNowPw" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_ID = #{member_id} AND MEMBER_PW = #{member_pw}
+	</select>
+	<select id="selectMyBoard" parameterType="map" resultType="BoardVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, D.* FROM
+		(SELECT * FROM CMPP_${board_name}_BOARD ORDER BY BOARD_IDX DESC) D)B
+		WHERE B.R BETWEEN #{startRow} AND #{endRow} AND MEMBER_UID = #{member_uid} 
+	</select>
+	<select id="selectMyBoardCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM CMPP_${board_name}_BOARD WHERE MEMBER_UID = #{member_uid}
+	</select>
+	<delete id="deleteMyBoard" parameterType="map">
+		DELETE CMPP_${board_name}_BOARD WHERE BOARD_IDX = #{board_idx}
+	</delete>
+	<delete id="deleteMyBoardFile" parameterType="_int">
+		DELETE CMPP_BOARD_FILE WHERE BOARD_IDX = #{board_idx}
+	</delete>
+	<delete id="deleteMyBoardComment" parameterType="_int">
+		DELETE CMPP_BOARD_COMMENT WHERE BOARD_IDX = #{board_idx}
+	</delete>
+	<delete id="deleteMyBoardReComment" parameterType="_int">
+		DELETE CMPP_RE_COMMENT WHERE BOARD_IDX = #{board_idx}
+	</delete>
+	<select id="selectReportReason" parameterType="_int" resultType="BoardReportVo">
+		SELECT * FROM CMPP_BOARD_REPORT WHERE BOARD_IDX = #{board_idx}
+	</select>
+	<insert id="insertMemberReport" parameterType="MemberReportVo">
+		INSERT INTO CMPP_MEMBER_REPORT VALUES (CMPP_M_REPORT_SEQ.NEXTVAL,#{writer},#{report_type},SYSDATE,#{reporter},1)
+	</insert>
+</mapper>

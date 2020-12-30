@@ -1,0 +1,6 @@
+package com.comypet.service;
+
+public interface MemberService {
+	public int join();
+	public String login();
+}

@@ -1,0 +1,5 @@
+package com.comypet.mapper;
+
+public interface MemberMapper {
+	public void insertMemberJoin();
+}

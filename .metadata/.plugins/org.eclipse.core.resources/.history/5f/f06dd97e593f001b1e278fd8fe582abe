@@ -1,0 +1,39 @@
+package com.comypet.service;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.comypet.domain.Criteria;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class MemberServiceTests {
+	@Setter(onMethod_= @Autowired)
+	private MemberService service;
+	
+	@Test
+	public void testCheckEmail() {
+		if(service.checkEmail("jsap50@naver.com")==0) {
+			log.info("ok..............");
+		}else {
+			log.info("no..............");
+		}
+	}
+	
+	/*@Test
+	public void testMyBoard() {
+		log.info(service.myBoard(new Criteria(1,10), "FREE", 4));
+	}*/
+
+	/*@Test
+	public void testInfo() {
+		log.info(service.myInfo(4));
+	}*/
+}

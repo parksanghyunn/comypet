@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Profiles">
+	<insert id="insertProfile">
+		INSERT INTO CMPP_PROFILE (PROFILE_IDX,MEMBER_UID,FILE_NAME) VALUES (CMPP_PROFILE_SEQ.NEXTVAL,CMPP_MEMBER_SEQ.CURRVAL,'defaultProfile.png')
+	</insert>
+	<select id="selectProfile" resultType="string">
+		SELECT FILE_NAME FROM CMPP_PROFILE WHERE MEMBER_UID = #{member_uid}
+	</select>
+	<update id="deleteProfile">
+		UPDATE CMPP_PROFILE SET FILE_NAME = 'defaultProfile.png' WHERE MEMBER_UID = #{member_uid}
+	</update>
+	<update id="updateProfile">
+		UPDATE CMPP_PROFILE SET FILE_NAME = #{file_name} WHERE MEMBER_UID = #{member_uid}
+	</update>
+</mapper>

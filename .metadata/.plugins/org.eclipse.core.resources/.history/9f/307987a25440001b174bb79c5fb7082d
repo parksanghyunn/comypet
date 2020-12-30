@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comypet.mapper.MemberMapper">
+	<insert id="insertMemberJoin">
+		INSERT INTO
+		CMPP_MEMBER_INFO
+		VALUES(CMPP_MEMBER_SEQ.NEXTVAL, #{member_name},
+		#{member_id}, #{member_pw}, #{member_nick}, #{member_gender},
+		#{member_birth}, #{member_tel}, #{member_email},#{member_zipcode},
+		#{member_address}, #{member_address_detail}, #{member_address_etc}, 0,0)
+	</insert>
+	
+	<select id="seletMemberLogin" resultType="string">
+		SELECT MEMBER_ID FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_PW = #{member_pw}
+	</select>
+	
+	<select id="selectMemberIdCheck" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_ID =
+		#{member_id}
+	</select>
+
+	<select id="selectMemberNickCheck" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_NICK =
+		#{member_nick}
+	</select>
+
+	<!-- 정지 처리 확인하기 -->
+<!-- 	<select id="selectMuteCheck" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_UID = #{member_uid} AND MEMBER_MUTE_COMMENT = 1 AND MEMBER_MUTE_CONTENTS = 1
+	</select> -->
+	<!-- 이메일 중복 확인 -->
+	<select id="selectEmailCheck" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_EMAIL = #{member_email}
+	</select>
+	<select id="selectMemberUid" resultType="_int">
+		SELECT MEMBER_UID FROM CMPP_MEMBER_INFO WHERE MEMBER_ID=#{member_id}
+	</select>
+
+	<!-- <select id="selectFindId" resultType="string">
+		SELECT MEMBER_ID FROM CMPP_MEMBER_INFO WHERE MEMBER_NAME =
+		#{member_name}
+		AND MEMBER_EMAIL = #{member_email}
+	</select>-->	
+	<!-- <select id="selectFindPw" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO 
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_EMAIL = #{member_email}
+	</select> -->
+	<select id="getNick" resultType="string">
+		SELECT MEMBER_NICK FROM CMPP_MEMBER_INFO WHERE MEMBER_UID =#{member_uid}
+	</select>
+	<select id="selectInfo" resultType="com.comypet.domain.MemberVO">
+		SELECT * FROM CMPP_MEMBER_INFO WHERE MEMBER_UID = #{member_uid}
+	</select>
+<!-- 	<update id="updateInfo">
+		UPDATE CMPP_MEMBER_INFO
+		SET MEMBER_NICK = #{member_nick}, MEMBER_TEL = #{member_tel},
+		MEMBER_ZIPCODE = #{member_zipcode}, MEMBER_ADDRESS =
+		#{member_address},
+		MEMBER_ADDRESS_DETAIL = #{member_address_detail},
+		MEMBER_ADDRESS_ETC = #{member_address_etc}
+		WHERE MEMBER_UID =
+		#{member_uid}
+	</update> -->
+	<!-- <update id="updatePw">
+		UPDATE CMPP_MEMBER_INFO SET MEMBER_PW = #{member_pw} WHERE MEMBER_ID =
+		#{member_id}
+	</update> -->
+	<!-- <select id="selectNowPw" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_MEMBER_INFO WHERE MEMBER_ID = #{member_id} AND MEMBER_PW = #{member_pw}
+	</select> -->
+	<select id="selectMyBoard" resultType="com.comypet.domain.BoardVO">
+	<![CDATA[
+		SELECT *
+		FROM 
+			(SELECT /*+ INDEX_DESC(CMPP_${board_name}_BOARD PK_${board_name}_BOARD) */ROWNUM RN, B.* 
+			FROM CMPP_${board_name}_BOARD 
+			WHERE 
+			ROWNUM <= #{pageNum} * #{amount}
+			AND MEMBER_UID = #{member_uid})
+		WHERE RN > (#{pageNum} - 1) * #{amount}
+	]]>
+	</select>
+	<select id="selectMyBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM CMPP_${board_name}_BOARD WHERE MEMBER_UID = #{member_uid}
+	</select>
+	<!-- <delete id="deleteMyBoard">
+		DELETE CMPP_${board_name}_BOARD WHERE BOARD_IDX = #{board_idx}
+	</delete> -->
+	<!-- <delete id="deleteMyBoardFile">
+		DELETE CMPP_BOARD_FILE WHERE BOARD_IDX = #{board_idx}
+	</delete> -->
+	<!-- <delete id="deleteMyBoardComment">
+		DELETE CMPP_BOARD_COMMENT WHERE BOARD_IDX = #{board_idx}
+	</delete> -->
+	<!-- <delete id="deleteMyBoardReComment">
+		DELETE CMPP_RE_COMMENT WHERE BOARD_IDX = #{board_idx}
+	</delete> -->
+	<!-- <select id="selectReportReason" resultType="BoardReportVo">
+		SELECT * FROM CMPP_BOARD_REPORT WHERE BOARD_IDX = #{board_idx}
+	</select> -->
+	<!-- <insert id="insertMemberReport">
+		INSERT INTO CMPP_MEMBER_REPORT VALUES (CMPP_M_REPORT_SEQ.NEXTVAL,#{writer},#{report_type},SYSDATE,#{reporter},1)
+	</insert> -->
+</mapper>

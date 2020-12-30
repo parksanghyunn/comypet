@@ -1,0 +1,5 @@
+package com.comypet.service;
+
+public interface MemberService {
+
+}
